@@ -1,4 +1,4 @@
-#  Beefy API
+# Beefy API
 
 API that powers [Beefy Finance](https://app.beefy.finance). You can find the repo for the frontend [here](https://github.com/beefyfinance/beefy-app).
 
@@ -34,9 +34,9 @@ yarn start
 
 After you start the API it can take a minute or two before you can fetch the APYs. We currently log `getApys()` to the console when all the data is available.
 
-**/:platform/price**: We have a few different endpoints to fetch price oracle information of different assets. We get most token prices from "/pancake/price" but there are some exceptions that come from "/bakery/price" for example. The intention is to eventually unify all token prices under the same endpoint.
+**/prices**: All token prices under the same endpoint (crosschain).
 
-**/:platform/lps**: We have a single endpoint per platform we farm to get its LP token prices. For example "kebab/lps" gives all the price info about the kebab LPs. Just like with the previous endpoint, we want to unify all LP prices under a single endpoint.
+**/lps**: All liqudity pair prices under a single endpoint (crosschain).
 
 ### Consumed by third party platforms
 
@@ -54,4 +54,4 @@ Beefy.Finance exists thanks to its contributors. There are many ways you can par
 
 ## License
 
-[MIT](LICENSE).
+[MIT](LICENSE)

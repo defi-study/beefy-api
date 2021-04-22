@@ -1,9 +1,6 @@
-const { sleep } = require('../../utils/time');
-
 const getCakeApys = require('./pancake/getCakeApys');
 const getCakePoolApy = require('./pancake/getCakePoolApy');
 const { getCakeLpApys } = require('./pancake/getCakeLpApys');
-const getFortubeApys = require('./fortube/getFortubeApys');
 const getBifiMaxiApy = require('./beefy/getBifiMaxiApy');
 const getBakePoolApy = require('./bakery/getBakePoolApy');
 const getBakeryLpApys = require('./bakery/getBakeryLpApys');
@@ -40,6 +37,18 @@ const getComAvaxApys = require('./complus/getComAvaxLpApys');
 const getComBscApys = require('./complus/getComBscLpApys');
 const getSnobLpApys = require('./snowball/getSnobLpApys');
 const getSuperNovaLpApys = require('./supernova/getSuperNovaLpApys');
+const getPumpyLpApys = require('./pumpy/getPumpyLpApys');
+const getAlpacaLpApys = require('./alpaca/getAlpacaLpApys');
+const getAlpacaApys = require('./alpaca/getAlpacaApys');
+const getEllipsisLpApys = require('./ellipsis/getEllipsisLpApys');
+const get1inchApy = require('./1inch/get1inchApy');
+const getSwirlLpApys = require('./swirl/getSwirlLpApys');
+const getOliveLpApys = require('./olive/getOliveLpApys');
+const getMdexBscLpApys = require('./mdex/getMdexBscLpApys');
+const getTyphLpApys = require('./typhoon/getTyphLpApys');
+const getLavaLpApys = require('./lavaswap/getLavaLpApys');
+const getLavaApy = require('./lavaswap/getLavaApy');
+const getBunnyRewardsApy = require('./bunny/getBunnyRewardsApy');
 
 const INIT_DELAY = 4 * 60 * 1000;
 const REFRESH_INTERVAL = 15 * 60 * 1000;
@@ -53,58 +62,73 @@ const getApys = () => {
 const updateApys = async () => {
   console.log('> updating apys');
 
-  const values = await Promise.all([
-    getBifiMaxiApy(),
-    getCakeApys(),
-    getCakePoolApy(),
-    getCakeLpApys(),
-    getFortubeApys(),
-    getBakePoolApy(),
-    getBakeryLpApys(),
-    getNarLpApys(),
-    getVenusApys(),
-    getJetfuelLpApys(),
-    getBdoLpApys(),
-    getSbdoLpApys(),
-    getHelmetPoolApy(),
-    getHelmetLpApy(),
-    getBhcPoolApy(),
-    getKebabLpApys(),
-    getKebabPoolApy(),
-    getMonsterLpApys(),
-    getJulDPoolApy(),
-    getNyacashNyasLpApys(),
-    getSpongeLpApys(),
-    getSpongePoolApy(),
-    getAutoApys(),
-    getMdexLpApys(),
-    getBtdLpApys(),
-    getBtsLpApys(),
-    getCrowLpApys(),
-    getMidasLpApys(),
-    getCafeLpApys(),
-    get1inchLpApys(),
-    getDegensLpApys(),
-    getJulLpApys(),
-    getBeltApys(),
-    getPangolinApys(),
-    getSwipeLpApys(),
-    getComAvaxApys(),
-    getComBscApys(),
-    getSnobLpApys(),
-    getSuperNovaLpApys(),
-  ]);
+  try {
+    const values = await Promise.all([
+      getBifiMaxiApy(),
+      getCakeApys(),
+      getCakePoolApy(),
+      getCakeLpApys(),
+      getBakePoolApy(),
+      getBakeryLpApys(),
+      getNarLpApys(),
+      getVenusApys(),
+      getJetfuelLpApys(),
+      getBdoLpApys(),
+      getSbdoLpApys(),
+      getHelmetPoolApy(),
+      getHelmetLpApy(),
+      getBhcPoolApy(),
+      getKebabLpApys(),
+      getKebabPoolApy(),
+      getMonsterLpApys(),
+      getJulDPoolApy(),
+      getNyacashNyasLpApys(),
+      getSpongeLpApys(),
+      getSpongePoolApy(),
+      getAutoApys(),
+      getMdexLpApys(),
+      getBtdLpApys(),
+      getBtsLpApys(),
+      getCrowLpApys(),
+      getMidasLpApys(),
+      getCafeLpApys(),
+      getRamenLpApys(),
+      get1inchLpApys(),
+      get1inchApy(),
+      getDegensLpApys(),
+      getJulLpApys(),
+      getBeltApys(),
+      getPangolinApys(),
+      getSwipeLpApys(),
+      getComAvaxApys(),
+      getComBscApys(),
+      getSnobLpApys(),
+      getSuperNovaLpApys(),
+      getPumpyLpApys(),
+      getAlpacaLpApys(),
+      getAlpacaApys(),
+      getEllipsisLpApys(),
+      getSwirlLpApys(),
+      getOliveLpApys(),
+      getMdexBscLpApys(),
+      getTyphLpApys(),
+      getLavaLpApys(),
+      getLavaApy(),
+      getBunnyRewardsApy(),
+    ]);
 
-  for (item of values) {
-    apys = { ...apys, ...item };
+    for (item of values) {
+      apys = { ...apys, ...item };
+    }
+
+    console.log('> updated apys');
+  } catch (err) {
+    console.error('> apy initialization failed', err);
   }
-
-  console.log('> updated apys');
 
   setTimeout(updateApys, REFRESH_INTERVAL);
 };
 
 setTimeout(updateApys, INIT_DELAY);
-
 
 module.exports = getApys;

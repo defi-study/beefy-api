@@ -6,7 +6,8 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/thugsLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
-const { BASE_HPY } = require('../../../../constants');
+const { BASE_HPY, BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getThugsLpApys = async () => {
   let apys = {};
@@ -34,7 +35,7 @@ const getPoolApy = async (gangster, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (gangster, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(BSC_CHAIN_ID);
   const gangsterContract = new web3.eth.Contract(OriginalGangster, gangster);
 
   const multiplier = new BigNumber(
@@ -56,7 +57,7 @@ const getYearlyRewardsInUsd = async (gangster, pool) => {
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
   const drugsPrice = await fetchPrice({
-    oracle: 'pancake',
+    oracle: 'tokens',
     id: 'DRUGS',
   });
   const yearlyRewardsInUsd = yearlyRewards.times(drugsPrice).dividedBy('1e18');

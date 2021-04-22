@@ -9,12 +9,12 @@ const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
 
 const stakingPool = '0x03d9d14367127d477e6F340C59E57ab088220187';
 const oracleId = 'NUTS';
-const oracle = 'pancake';
+const oracle = 'tokens';
 const DECIMALS = '1e18';
 const BLOCKS_PER_DAY = 28800;
 
 const getSquirrelApys = async () => {
-  const nutsStakingApr = 3; // hardcoded 300% APR
+  const nutsStakingApr = 1; // hardcoded 100% APR
   let apys = { 'squirrel-nuts': compound(nutsStakingApr, process.env.BASE_HPY, 1, 0.955) };
 
   let promises = [];
@@ -38,7 +38,7 @@ const getPoolApy = async (stakingPool, pool) => {
   return { [pool.name]: apy };
 };
 
-const getYearlyRewardsInUsd = async (stakingPool) => {
+const getYearlyRewardsInUsd = async stakingPool => {
   const tokenPrice = await fetchPrice({ oracle, id: oracleId });
 
   const rewardPool = new web3.eth.Contract(NutsLPStaking, stakingPool);

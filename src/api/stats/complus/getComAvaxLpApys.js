@@ -6,10 +6,12 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/comAvaxLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
+const { AVAX_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const masterchef = '0xa329D806fbC80a14415588334ae4b205813C6BB2';
 const oracleId = 'COM';
-const oracle = 'pangolin';
+const oracle = 'tokens';
 const DECIMALS = '1e18';
 const chainId = 43114;
 
@@ -39,11 +41,11 @@ const getPoolApy = async (masterchef, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (masterchef, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(AVAX_CHAIN_ID);
   const masterchefContract = new web3.eth.Contract(MasterChef, masterchef);
 
   const multiplier = new BigNumber(
-    await masterchefContract.methods.getMultiplier(blockNum - 1, blockNum).call(),
+    await masterchefContract.methods.getMultiplier(blockNum - 1, blockNum).call()
   );
   const blockRewards = new BigNumber(await masterchefContract.methods.comPerBlock().call());
 

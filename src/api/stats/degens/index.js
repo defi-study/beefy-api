@@ -1,5 +1,6 @@
 const getRamenLpApys = require('../ramen/getRamenLpApys');
-const getBlizzardLpApys = require('./getBlizzardLpApys')
+const getBlizzardApy = require('./getBlizzardApy');
+const getBlizzardLpApys = require('./getBlizzardLpApys');
 const getSaltLpApys = require('./getSaltLpApys');
 const getApeApys = require('./getApeLpApys');
 const getApeBananaApys = require('./getApeBananaApy');
@@ -7,9 +8,23 @@ const getSoupApys = require('./getSoupLpApys');
 const getMemeFarmApys = require('./getMemeFarmLpApys');
 const getSquirrelApys = require('./getSquirrelLpApys');
 const getSlimeApys = require('./getSlimeLpApys');
+const getSpaceLpApys = require('./getSpaceLpApys');
+const getNautApy = require('./getNautApy');
+const getHpsApys = require('./getHpsApys');
+const getZefiLpApys = require('./getZefiLpApys');
+const getThunderLpApys = require('./getThunderLpApys');
+const getSwampyLpApys = require('./getSwampyLpApys');
+const getSwampyCakeLpApys = require('./getSwampyCakeLpApys');
+const getYieldBayLpApys = require('./getYieldBayLpApys');
+const getBingoLpApys = require('./getBingoLpApys');
+const getBitiLpApys = require('./getBitiLpApys');
+const getSwampySwampApy = require('./getSwampySwampApy');
+const getSwampyCakeApy = require('./getSwampyCakeApy');
+const getMarshLpApys = require('./getMarshLpApys');
 
 const getApys = [
   getRamenLpApys,
+  getBlizzardApy,
   getBlizzardLpApys,
   getSaltLpApys,
   getApeApys,
@@ -17,7 +32,20 @@ const getApys = [
   getSoupApys,
   getMemeFarmApys,
   getSquirrelApys,
-  getSlimeApys
+  getSlimeApys,
+  getSpaceLpApys,
+  getNautApy,
+  getHpsApys,
+  getZefiLpApys,
+  getThunderLpApys,
+  getSwampyLpApys,
+  getSwampyCakeLpApys,
+  getSwampyCakeApy,
+  getYieldBayLpApys,
+  getBingoLpApys,
+  getBitiLpApys,
+  getSwampySwampApy,
+  getMarshLpApys,
 ];
 
 const getDegensLpApys = async () => {

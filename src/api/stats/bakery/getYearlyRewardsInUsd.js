@@ -3,9 +3,11 @@ const { bscWeb3: web3 } = require('../../../utils/web3');
 
 const IBakeryMaster = require('../../../abis/IBakeryMaster.json');
 const fetchPrice = require('../../../utils/fetchPrice');
+const getBlockNumber = require('../../../utils/getBlockNumber');
+const { BSC_CHAIN_ID } = require('../../../../constants');
 
 const getYearlyRewardsInUsd = async (bakeryMaster, asset) => {
-  const currentBlock = await web3.eth.getBlockNumber();
+  const currentBlock = await getBlockNumber(BSC_CHAIN_ID);
   const bakeryMasterContract = new web3.eth.Contract(IBakeryMaster, bakeryMaster);
 
   let [blockRewards, totalAllocPoint] = await Promise.all([
@@ -25,7 +27,7 @@ const getYearlyRewardsInUsd = async (bakeryMaster, asset) => {
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
-  const bakePrice = await fetchPrice({ oracle: 'pancake', id: 'BAKE' });
+  const bakePrice = await fetchPrice({ oracle: 'tokens', id: 'BAKE' });
   const yearlyRewardsInUsd = yearlyRewards.times(bakePrice).dividedBy('1e18');
 
   return yearlyRewardsInUsd;

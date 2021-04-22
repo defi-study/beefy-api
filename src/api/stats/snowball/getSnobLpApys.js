@@ -5,19 +5,30 @@ const MasterChef = require('../../../abis/IceQueen.json');
 const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/snobLpPools.json');
 const { compound } = require('../../../utils/compound');
-const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
+const { getTotalStakedInUsd, getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
+const { AVAX_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const masterchef = '0xB12531a2d758c7a8BF09f44FC88E646E1BF9D375';
 const oracleId = 'SNOB';
-const oracle = 'pangolin';
+const oracle = 'tokens';
 const DECIMALS = '1e18';
 const chainId = 43114;
 
 const getSnobLpApys = async () => {
   let apys = {};
 
+  const allPools = pools.slice();
+  allPools.push({
+    name: 'snob-3pool',
+    poolId: 7,
+    address: '0xde1a11c331a0e45b9ba8fee04d4b51a745f1e4a4',
+    oracle: 'lps',
+    oracleId: 'snob-3pool',
+  });
+
   let promises = [];
-  pools.forEach(pool => promises.push(getPoolApy(masterchef, pool)));
+  allPools.forEach(pool => promises.push(getPoolApy(masterchef, pool)));
   const values = await Promise.all(promises);
 
   for (item of values) {
@@ -28,9 +39,15 @@ const getSnobLpApys = async () => {
 };
 
 const getPoolApy = async (masterchef, pool) => {
+  let getTotalStaked;
+  if (pool.poolId === 7) {
+    getTotalStaked = getTotalStakedInUsd(masterchef, pool.address, pool.oracle, pool.oracleId, '1e18', 43114);
+  } else {
+    getTotalStaked = getTotalLpStakedInUsd(masterchef, pool, chainId);
+  }
   const [yearlyRewardsInUsd, totalStakedInUsd] = await Promise.all([
     getYearlyRewardsInUsd(masterchef, pool),
-    getTotalLpStakedInUsd(masterchef, pool, chainId),
+    getTotalStaked,
   ]);
   const simpleApy = yearlyRewardsInUsd.dividedBy(totalStakedInUsd);
   const apy = compound(simpleApy, process.env.BASE_HPY, 1, 0.955);
@@ -39,7 +56,7 @@ const getPoolApy = async (masterchef, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (masterchef, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(AVAX_CHAIN_ID);
   const masterchefContract = new web3.eth.Contract(MasterChef, masterchef);
 
   const multiplier = new BigNumber(
@@ -56,7 +73,7 @@ const getYearlyRewardsInUsd = async (masterchef, pool) => {
     .times(allocPoint)
     .dividedBy(totalAllocPoint);
 
-  const secondsPerBlock = 3;
+  const secondsPerBlock = 5;
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 

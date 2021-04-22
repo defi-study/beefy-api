@@ -6,7 +6,8 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/jetfuelLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
-const { BASE_HPY } = require('../../../../constants');
+const { BASE_HPY, BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getJetfuelLpApys = async () => {
   let apys = {};
@@ -36,7 +37,7 @@ const getPoolApy = async (masterFuel, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (masterFuel, poolId) => {
-  const currentBlock = await web3.eth.getBlockNumber();
+  const currentBlock = await getBlockNumber(BSC_CHAIN_ID);
   const masterFuelContract = new web3.eth.Contract(MasterFuel, masterFuel);
 
   let [blockRewards, totalAllocPoint] = await Promise.all([
@@ -56,7 +57,7 @@ const getYearlyRewardsInUsd = async (masterFuel, poolId) => {
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
-  const fuelPrice = await fetchPrice({ oracle: 'pancake', id: 'Fuel' });
+  const fuelPrice = await fetchPrice({ oracle: 'tokens', id: 'Fuel' });
   const yearlyRewardsInUsd = yearlyRewards.times(fuelPrice).dividedBy('1e18');
 
   return yearlyRewardsInUsd;

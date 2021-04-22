@@ -6,7 +6,8 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/midasLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
-const { BASE_HPY } = require('../../../../constants');
+const { BASE_HPY, BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getMidasLpApys = async () => {
   let apys = {};
@@ -35,7 +36,7 @@ const getPoolApy = async (shareRewardPool, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (shareRewardPool, poolId) => {
-  const currentBlock = await web3.eth.getBlockNumber();
+  const currentBlock = await getBlockNumber(BSC_CHAIN_ID);
   const rewardPoolContract = new web3.eth.Contract(ShareRewardPool, shareRewardPool);
 
   let [blockRewards, totalAllocPoint] = await Promise.all([
@@ -55,7 +56,7 @@ const getYearlyRewardsInUsd = async (shareRewardPool, poolId) => {
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
-  const bdoPrice = await fetchPrice({ oracle: 'pancake', id: 'MDS' });
+  const bdoPrice = await fetchPrice({ oracle: 'tokens', id: 'MDS' });
   const yearlyRewardsInUsd = yearlyRewards.times(bdoPrice).dividedBy('1e18');
 
   return yearlyRewardsInUsd;

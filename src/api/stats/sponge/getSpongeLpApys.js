@@ -6,6 +6,8 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/spongeLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
+const { BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getSpongeLpApys = async () => {
   let apys = {};
@@ -33,7 +35,7 @@ const getPoolApy = async (masterchef, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (masterchef, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(BSC_CHAIN_ID);
   const masterchefContract = new web3.eth.Contract(MasterChef, masterchef);
 
   const multiplier = new BigNumber(
@@ -54,7 +56,7 @@ const getYearlyRewardsInUsd = async (masterchef, pool) => {
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
-  const soakPrice = await fetchPrice({ oracle: 'pancake', id: 'SOAK' });
+  const soakPrice = await fetchPrice({ oracle: 'tokens', id: 'SOAK' });
   if (pool.poolId === 3) {
     const yearlyRewardsInUsd = yearlyRewards.times(soakPrice).dividedBy('1e18').times(0.81); // *0.81 because of the 2% burn on SOAK
     return yearlyRewardsInUsd;

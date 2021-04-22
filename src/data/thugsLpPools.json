@@ -1,54 +1,18 @@
 [
   {
-    "name": "street-btri-bnb",
-    "address": "0x982eE1343c73688314990483dea924808231dE4D",
-    "poolId": 30,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x30C18C9cb3de61f2BD1974749A6f5725150208F3",
-      "oracle": "pancake",
-      "oracleId": "bTRI",
-      "decimals": "1e9"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-btri-cred",
-    "address": "0xF271F9Cc3E3626394978A9C0C9582931fa3caDD1",
-    "poolId": 31,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x30C18C9cb3de61f2BD1974749A6f5725150208F3",
-      "oracle": "pancake",
-      "oracleId": "bTRI",
-      "decimals": "1e9"
-    },
-    "lp1": {
-      "address": "0x571D0B55fe30eb1F6E68e8799F181c46De6B0059",
-      "oracle": "pancake",
-      "oracleId": "CRED",
-      "decimals": "1e18"
-    }
-  },
-  {
     "name": "street-bhc-bnb",
     "address": "0xd46E7f33f8788f87D6017074dC4e4d781D3df91E",
     "poolId": 28,
     "decimals": "1e18",
     "lp0": {
       "address": "0x6fd7c98458a943f469E1Cf4eA85B173f5Cd342F4",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "BHC",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -60,13 +24,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xC13B7a43223BB9Bf4B69BD68Ab20ca1B79d81C75",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "JGN",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -78,13 +42,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x4B0F1812e5Df2A09796481Ff14017e6005508003",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "TWT",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -96,13 +60,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x47BEAd2563dCBf3bF2c9407fEa4dC236fAbA485A",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "SXP",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -114,67 +78,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xcF6BB5389c92Bdda8a3747Ddb454cB7a64626C63",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "XVS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-inj-bnb",
-    "address": "0x45ac15fb9650a790A0cD0f2b10c5EC4a6BbFCc2c",
-    "poolId": 25,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0xa2B726B1145A4773F68593CF171187d8EBe4d495",
-      "oracle": "pancake",
-      "oracleId": "INJ",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-unfi-bnb",
-    "address": "0x0fF2D8B1A11195526f42905892bCb29e7b9F338D",
-    "poolId": 26,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x728C5baC3C3e370E372Fc4671f9ef6916b814d8B",
-      "oracle": "pancake",
-      "oracleId": "UNFI",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-ltc-bnb",
-    "address": "0x8Ea481FE8e35c74355DaF9B5f6b3b69F3c864aFc",
-    "poolId": 27,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
-      "oracle": "pancake",
-      "oracleId": "LTC",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -186,13 +96,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xa1faa113cbE53436Df28FF0aEe54275c13B40975",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "ALPHA",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -204,31 +114,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "BCH",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-link-bnb",
-    "address": "0x2c92d0390f95477c70cb7B4B92050B0Db5D04a1E",
-    "poolId": 17,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
-      "oracle": "pancake",
-      "oracleId": "LINK",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -240,13 +132,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xA1303E6199b319a891b79685F0537D289af1FC83",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "NAR",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -259,13 +151,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x339550404Ca4d831D12B1b2e4768869997390010",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "DRUGS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -277,13 +169,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xE10e9822A5de22F8761919310DDA35CD997d63c0",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "THUGS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -295,13 +187,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x571D0B55fe30eb1F6E68e8799F181c46De6B0059",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "CRED",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -313,13 +205,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x179983892eC36287f1F342443B671Ba549762241",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "GUNS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -331,54 +223,17 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "BUSD",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
   },
-  {
-    "name": "street-btc-bnb",
-    "address": "0xdFb193940E1317f38e91568fdb05EFE18ee4A3c7",
-    "poolId": 5,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
-      "oracle": "pancake",
-      "oracleId": "BTCB",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-  {
-    "name": "street-eth-bnb",
-    "address": "0x75115C644F9661A761A333Ba0A38e42B1649f143",
-    "poolId": 6,
-    "decimals": "1e18",
-    "lp0": {
-      "address": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
-      "oracle": "pancake",
-      "oracleId": "ETH",
-      "decimals": "1e18"
-    },
-    "lp1": {
-      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
-      "oracleId": "WBNB",
-      "decimals": "1e18"
-    }
-  },
-
   {
     "name": "street-panacakelp-thugs-bnb",
     "address": "0x40257481f09dB2211a3274B34554Bbb00B0a7Fb1",
@@ -386,13 +241,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xE10e9822A5de22F8761919310DDA35CD997d63c0",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "THUGS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -404,13 +259,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "DAI",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -422,13 +277,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x55d398326f99059fF775485246999027B3197955",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "USDT",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -440,13 +295,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xC97faC34CeB0Bb1B2bdAf3b59ADA378b99111a22",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "BLIQ",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -459,13 +314,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0x56b6fB708fC5732DEC1Afc8D8556423A2EDcCbD6",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "EOS",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }
@@ -477,13 +332,13 @@
     "decimals": "1e18",
     "lp0": {
       "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "BIFI",
       "decimals": "1e18"
     },
     "lp1": {
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      "oracle": "pancake",
+      "oracle": "tokens",
       "oracleId": "WBNB",
       "decimals": "1e18"
     }

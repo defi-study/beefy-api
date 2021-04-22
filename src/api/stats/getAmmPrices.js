@@ -3,6 +3,7 @@ const { sleep } = require('../../utils/time');
 
 const bakeryPools = require('../../data/bakeryLpPools.json');
 const blizzardLpPools = require('../../data/degens/blizzardLpPools.json');
+const alpacaLpPools = require('../../data/alpacaLpPools.json');
 const cafePools = require('../../data/cafeLpPools.json');
 const cakeLpPools = require('../../data/cakeLpPools.json');
 const cakePools = require('../../data/cakePools.json');
@@ -36,14 +37,53 @@ const swipePools = require('../../data/swipeLpPools.json');
 const comAvaxPools = require('../../data/comAvaxLpPools.json');
 const comBscPools = require('../../data/comBscLpPools.json');
 const snowballPools = require('../../data/snobLpPools.json');
-const supernovaPools = require('../../data/supernovaLpPools.json')
+const supernovaPools = require('../../data/supernovaLpPools.json');
+const pumpyPools = require('../../data/pumpyLpPools.json');
+const spacePools = require('../../data/degens/spaceLpPools.json');
+const nautPools = require('../../data/degens/nautLpPools.json');
+const ellipsisPools = require('../../data/ellipsisLpPools.json');
+const hpsPools = require('../../data/degens/hpsLpPools.json');
+const zefiPools = require('../../data/degens/zefiLpPools.json');
+const thunderPools = require('../../data/degens/thunderLpPools.json');
+const swirlPools = require('../../data/swirlLpPools.json');
+const getBeltPrices = require('./belt/getBeltPrices');
+const getEllipsisPrices = require('./ellipsis/getEllipsisPrices');
+const getSnob3PoolPrice = require('./snowball/getSnob3PoolPrice');
+const swampyPools = require('../../data/degens/swampyLpPools.json');
+const yieldBayPools = require('../../data/degens/yieldBayLpPools.json');
+const bingoPools = require('../../data/degens/bingoLpPools.json');
+const olivePools = require('../../data/oliveLpPools.json');
+const bitiPools = require('../../data/degens/bitiLpPools.json');
+const mdexBscPools = require('../../data/mdexBscLpPools.json');
+const typhPools = require('../../data/typhLpPools.json');
+const marshPools = require('../../data/degens/marshLpPools.json');
+const lavaPools = require('../../data/lavaLpPools.json');
+const popsiclePools = require('../../data/popsicleLpPools.json');
 
-const INIT_DELAY = 30 * 1000;
+const INIT_DELAY = 60 * 1000;
 const REFRESH_INTERVAL = 10 * 60 * 1000;
 
 // FIXME: if this list grows too big we might hit the ratelimit on initialization everytime
-// Implement in case of emergency -> https://github.com/beefyfinance/beefy-api/issues/103 
+// Implement in case of emergency -> https://github.com/beefyfinance/beefy-api/issues/103
 const pools = [
+  ...popsiclePools,
+  ...lavaPools,
+  ...marshPools,
+  ...typhPools,
+  ...mdexBscPools,
+  ...bitiPools,
+  ...olivePools,
+  ...bingoPools,
+  ...yieldBayPools,
+  ...swampyPools,
+  ...swirlPools,
+  ...thunderPools,
+  ...zefiPools,
+  ...hpsPools,
+  ...ellipsisPools,
+  ...nautPools,
+  ...spacePools,
+  ...pumpyPools,
   ...supernovaPools,
   ...snowballPools,
   ...comBscPools,
@@ -56,6 +96,7 @@ const pools = [
   ...memePools,
   ...julPools,
   ...autoPools,
+  ...alpacaLpPools,
   ...soupPools,
   ...apePools,
   ...saltPools,
@@ -100,8 +141,11 @@ const updateAmmPrices = async () => {
   isProcessing = true;
   try {
     let { poolPrices, tokenPrices } = await fetchAmmPoolsPrices(pools, knownPrices);
+    const beltLPs = await getBeltPrices();
+    const ellipsisLPs = await getEllipsisPrices();
+    const snob3PoolLP = await getSnob3PoolPrice();
     tokenPricesCache = tokenPrices;
-    lpPricesCache = poolPrices;
+    lpPricesCache = { ...poolPrices, ...beltLPs, ...ellipsisLPs, ...snob3PoolLP };
   } catch (err) {
     console.error(err);
   }
@@ -112,20 +156,42 @@ const updateAmmPrices = async () => {
 };
 
 const getAmmTokensPrices = async () => {
-  // TODO: can we replace this mutex with events system?  
-  while (isProcessing) { await sleep(500); }
+  // TODO: can we replace this mutex with events system?
+  while (isProcessing) {
+    await sleep(500);
+  }
   return tokenPricesCache;
 };
 
 const getAmmLpPrices = async () => {
-  while (isProcessing) { await sleep(500); }
+  while (isProcessing) {
+    await sleep(500);
+  }
   return lpPricesCache;
+};
+
+const getAmmTokenPrice = async tokenSymbol => {
+  const tokenPrices = await getAmmTokensPrices();
+  if (tokenPrices.hasOwnProperty(tokenSymbol)) {
+    return tokenPrices[tokenSymbol];
+  }
+  console.error(`Unknown token '${tokenSymbol}'. Consider adding it to .json file`);
+};
+
+const getAmmLpPrice = async lpName => {
+  const lpPrices = await getAmmLpPrices();
+  if (lpPrices.hasOwnProperty(lpName)) {
+    return lpPrices[lpName];
+  }
+  console.error(`Unknown liqudity pair '${lpName}'. Consider adding it to .json file`);
 };
 
 // Flexible delayed initialization used to work around ratelimits
 setTimeout(updateAmmPrices, INIT_DELAY);
 
 module.exports = {
+  getAmmTokenPrice,
   getAmmTokensPrices,
+  getAmmLpPrice,
   getAmmLpPrices,
 };

@@ -6,10 +6,12 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/comBscLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
+const { BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const masterchef = '0x110650bBAfCe4Ec7e864fe4A4A88BBD4AF547159';
 const oracleId = 'bCOM';
-const oracle = 'pancake';
+const oracle = 'tokens';
 const DECIMALS = '1e18';
 const chainId = 56;
 
@@ -39,11 +41,11 @@ const getPoolApy = async (masterchef, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (masterchef, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(BSC_CHAIN_ID);
   const masterchefContract = new web3.eth.Contract(MasterChef, masterchef);
 
   const multiplier = new BigNumber(
-    await masterchefContract.methods.getMultiplier(blockNum - 1, blockNum).call(),
+    await masterchefContract.methods.getMultiplier(blockNum - 1, blockNum).call()
   );
   const blockRewards = new BigNumber(await masterchefContract.methods.comPerBlock().call());
 
@@ -61,7 +63,6 @@ const getYearlyRewardsInUsd = async (masterchef, pool) => {
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
   const tokenPrice = await fetchPrice({ oracle, id: oracleId });
-  console.log('price', tokenPrice.valueOf());
   const yearlyRewardsInUsd = yearlyRewards.times(tokenPrice).dividedBy(DECIMALS);
 
   return yearlyRewardsInUsd;

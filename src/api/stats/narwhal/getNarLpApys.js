@@ -6,7 +6,8 @@ const fetchPrice = require('../../../utils/fetchPrice');
 const pools = require('../../../data/narLpPools.json');
 const { compound } = require('../../../utils/compound');
 const { getTotalLpStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
-const { BASE_HPY } = require('../../../../constants');
+const { BASE_HPY, BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getNarLpApys = async () => {
   let apys = {};
@@ -34,7 +35,7 @@ const getPoolApy = async (goldFarm, pool) => {
 };
 
 const getYearlyRewardsInUsd = async (goldFarm, pool) => {
-  const blockNum = await web3.eth.getBlockNumber();
+  const blockNum = await getBlockNumber(BSC_CHAIN_ID);
   const goldFarmContract = new web3.eth.Contract(IGoldFarm, goldFarm);
 
   const multiplier = new BigNumber(
@@ -55,7 +56,7 @@ const getYearlyRewardsInUsd = async (goldFarm, pool) => {
   const secondsPerYear = 31536000;
   const yearlyRewards = poolBlockRewards.dividedBy(secondsPerBlock).times(secondsPerYear);
 
-  const narPrice = await fetchPrice({ oracle: 'pancake', id: 'NAR' });
+  const narPrice = await fetchPrice({ oracle: 'tokens', id: 'NAR' });
   const yearlyRewardsInUsd = yearlyRewards.times(narPrice).dividedBy('1e18');
 
   return yearlyRewardsInUsd;

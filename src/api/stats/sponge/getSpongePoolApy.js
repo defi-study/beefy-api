@@ -5,11 +5,13 @@ const MasterChef = require('../../../abis/MasterChef.json');
 const fetchPrice = require('../../../utils/fetchPrice');
 const { getTotalStakedInUsd } = require('../../../utils/getTotalStakedInUsd');
 const { compound } = require('../../../utils/compound');
+const { BSC_CHAIN_ID } = require('../../../../constants');
+const getBlockNumber = require('../../../utils/getBlockNumber');
 
 const getSoakPoolApy = async () => {
   const masterChef = '0x303961805A22d76Bac6B2dE0c33FEB746d82544B';
   const soak = '0x849233FF1aea15D80EF658B2871664C9Ca994063';
-  const oracle = 'pancake';
+  const oracle = 'tokens';
   const oracleId = 'SOAK';
 
   const [yearlyRewardsInUsd, totalStakedInUsd] = await Promise.all([
@@ -24,7 +26,7 @@ const getSoakPoolApy = async () => {
 };
 
 const getYearlyRewardsInUsd = async (masterChefAddr, oracle, oracleId) => {
-  const fromBlock = await web3.eth.getBlockNumber();
+  const fromBlock = await getBlockNumber(BSC_CHAIN_ID);
   const toBlock = fromBlock + 1;
   const masterChefContract = new web3.eth.Contract(MasterChef, masterChefAddr);
 

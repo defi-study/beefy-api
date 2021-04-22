@@ -7,6 +7,7 @@ const fetchPrice = require('../../utils/fetchPrice');
 const pools = require('../../data/stakePools.json');
 
 const INTERVAL = 3 * 60 * 1000;
+const INIT_DELAY = 4 * 60 * 1000;
 const BLOCKS_PER_DAY = 28800;
 
 let stakedPoolsData = {};
@@ -16,7 +17,13 @@ const getStakePoolsData = () => {
 };
 
 const updateStakePools = async () => {
-  stakedPoolsData = await getStakePools();
+  console.log('> updating stake pools');
+  try {
+    stakedPoolsData = await getStakePools();
+    console.log('> updated stake pools');
+  } catch (err) {
+    console.error('> stake pool update failed', err);
+  }
   setTimeout(updateStakePools, INTERVAL);
 };
 
@@ -70,6 +77,7 @@ const getYearlyRewardsInUsd = async pool => {
   return yearlyRewardsInUsd;
 };
 
-updateStakePools();
+// Flexible delayed initialization used to work around ratelimits
+setTimeout(updateStakePools, INIT_DELAY);
 
 module.exports = getStakePoolsData;
